@@ -10,20 +10,21 @@ import SwiftUI
 struct DrinkObjectView: View {
     var urlString: URL
     var drinkName: String
-    @State private var truu = false
+    
+    @State private var isSheetDisplayed = false
+    
     var body: some View {
         Button {
-            truu.toggle()
+            isSheetDisplayed.toggle()
         } label: {
             HStack (spacing: 20){
                 AsyncImage(url: urlString, content: { image in
                                     image.resizable()
                                              .aspectRatio(contentMode: .fit)
-                                             .frame(maxWidth: 100)
+                                             .frame(maxWidth: 80)
                                     }, placeholder: {
                                         ProgressView()
                                     })
-                .frame(width: 80, height: 80)
                 .clipShape(Circle())
                 .shadow(radius: 5)
                 
@@ -31,8 +32,23 @@ struct DrinkObjectView: View {
                     .font(.body).bold()
             }
             .padding(.vertical, 5)
-            .sheet(isPresented: $truu) {
-                Text("Drink")
+            .sheet(isPresented: $isSheetDisplayed) {
+                VStack {
+                    AsyncImage(url: urlString, content: { image in
+                                        image.resizable()
+                                                 .aspectRatio(contentMode: .fit)
+                                                 .frame(maxWidth: 300)
+                                        }, placeholder: {
+                                            ProgressView()
+                                        })
+                    .cornerRadius(25)
+                    
+                    Text(drinkName)
+                        .font(.title).bold()
+                    
+                    Spacer()
+                }
+                .task P
             }
         }
     }

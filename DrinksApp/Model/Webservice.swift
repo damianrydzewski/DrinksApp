@@ -31,4 +31,22 @@ class Webservice {
         let drinkResponse = try? JSONDecoder().decode(DrinkResponse.self, from: data)
         return drinkResponse?.drinks ?? []
     }
+    
+    
+    
+    
+    func fetchDrinkDetail(drinkID: String) async throws -> [DrinkDetail] {
+        guard let url = URL(string: "https://thecocktaildb.com/api/json/v1/1/lookup.php?i=\(drinkID.trimmed())") else {
+            throw NetworkError.badURL
+        }
+        
+        let (data, response) = try await URLSession.shared.data(from: url)
+        
+        guard let httpResponse = response as? HTTPURLResponse,
+                  httpResponse.statusCode == 200 else {throw NetworkError.badRequest}
+        
+        let drinkDetailResponse = try? JSONDecoder().decode(DrinkDetailResponse.self, from: data)
+        return drinkDetailResponse?.drinks ?? []
+        
+    }
 }
