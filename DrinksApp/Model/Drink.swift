@@ -18,6 +18,16 @@ struct Drink: Decodable {
     let idDrink: String
 }
 
+
+
+
+
+
+
+
+
+
+
 struct DrinkDetailResponse: Decodable {
     let drinks: [DrinkDetail]
 }

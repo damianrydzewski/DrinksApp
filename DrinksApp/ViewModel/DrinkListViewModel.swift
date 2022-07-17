@@ -12,11 +12,11 @@ import Foundation
 class DrinkListViewModel: ObservableObject {
 
     @Published var drinks: [DrinkViewModel] = []
-    @Published var drink: [DrinkDetailVM] = []
+    @Published var drinkDetail: [DrinkDetailVM] = []
     
     func search(name: String) async {
         do {
-             let drinks = try await Webservice().getDrinks(searchTerm: name)
+            let drinks = try await Webservice().getDrinks(searchTerm: name)
             
             DispatchQueue.main.async {
                 self.drinks = drinks.map(DrinkViewModel.init)
@@ -28,13 +28,14 @@ class DrinkListViewModel: ObservableObject {
     
     
     
-    func getDrinkDetail(drinkID: String) async{
+    func displayDrinkDetail(drinkID: String) async {
         do {
-            let drink = try await Webservice().fetchDrinkDetail(drinkID: drinkID)
+            let drinks = try await Webservice().fetchDrinkDetail(drinkID: drinkID)
+            
             DispatchQueue.main.async {
-                self.drink = drink.map(DrinkDetailVM.init)
+                self.drinkDetail = drinks.map(DrinkDetailVM.init)
             }
-        } catch {
+        }catch {
             print(error)
         }
     }

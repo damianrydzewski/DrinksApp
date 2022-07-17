@@ -8,17 +8,19 @@
 import SwiftUI
 
 struct DrinkObjectView: View {
-    var urlString: URL
+    
+    var drinkThumb: URL
     var drinkName: String
+    var drinkIDs: String
     
     @State private var isSheetDisplayed = false
-    
+
     var body: some View {
         Button {
             isSheetDisplayed.toggle()
         } label: {
             HStack (spacing: 20){
-                AsyncImage(url: urlString, content: { image in
+                AsyncImage(url: drinkThumb, content: { image in
                                     image.resizable()
                                              .aspectRatio(contentMode: .fit)
                                              .frame(maxWidth: 80)
@@ -33,22 +35,9 @@ struct DrinkObjectView: View {
             }
             .padding(.vertical, 5)
             .sheet(isPresented: $isSheetDisplayed) {
-                VStack {
-                    AsyncImage(url: urlString, content: { image in
-                                        image.resizable()
-                                                 .aspectRatio(contentMode: .fit)
-                                                 .frame(maxWidth: 300)
-                                        }, placeholder: {
-                                            ProgressView()
-                                        })
-                    .cornerRadius(25)
-                    
-                    Text(drinkName)
-                        .font(.title).bold()
-                    
-                    Spacer()
-                }
-                .task P
+                //SECOND SCREEN
+
+                
             }
         }
     }

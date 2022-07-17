@@ -16,7 +16,11 @@ struct ContentView: View {
 
         NavigationView{
             List(drinkListVM.drinks, id: \.idDrink) {drink in
-                DrinkObjectView(urlString: drink.strDrinkThumb!, drinkName: drink.strDrink)
+                
+                DrinkObjectView(drinkThumb: drink.strDrinkThumb!,
+                                drinkName: drink.strDrink,
+                                drinkIDs: drink.idDrink)
+                
             }
             .navigationTitle("Search for drink")
             .listStyle(.plain)
@@ -30,7 +34,6 @@ struct ContentView: View {
                     }
                 }
             }
-
         }
         .navigationTitle("Drinks App")
     }
