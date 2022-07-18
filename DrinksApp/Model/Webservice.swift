@@ -38,12 +38,8 @@ class Webservice {
         guard let url = URL(string: "https://thecocktaildb.com/api/json/v1/1/lookup.php?i=\(drinkID.trimmed())") else {
             throw NetworkError.badURL
         }
-        
-        print(url)
-        
+                
         let (data, _) = try await URLSession.shared.data(from: url)
-
-        
         let decodedResponse = try? JSONDecoder().decode(DrinkDetailResponse.self, from: data)
         
         return decodedResponse?.drinks ?? []
