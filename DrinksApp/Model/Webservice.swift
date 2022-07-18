@@ -11,10 +11,9 @@ import Foundation
 enum NetworkError: Error {
     case badURL
     case badRequest
-    case badJSONDecoded
 }
 
-class Webservice {
+class APICall {
     
     func getDrinks(searchTerm: String) async throws -> [Drink] {
         guard let url = URL(string: "https://thecocktaildb.com/api/json/v1/1/filter.php?i=\(searchTerm.trimmed())") else {

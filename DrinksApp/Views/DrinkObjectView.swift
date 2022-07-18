@@ -8,13 +8,12 @@
 import SwiftUI
 
 struct DrinkObjectView: View {
+    @StateObject var drinkDetailVM = DrinkListViewModel()
+    @State private var isSheetDisplayed = false
     
     var drinkThumb: URL
     var drinkName: String
     var drinkIDs: String
-    
-    @State private var isSheetDisplayed = false
-    @StateObject var drinkDetail = DrinkListViewModel()
 
     var body: some View {
         Button {
@@ -36,43 +35,111 @@ struct DrinkObjectView: View {
             }
             .padding(.vertical, 5)
             .sheet(isPresented: $isSheetDisplayed) {
+                
                 //SECOND SCREEN
-                 
-                ForEach(drinkDetail.drinkDetail, id: \.idDrink) { drink in
-                    AsyncImage(url: drink.strDrinkThumb, content: { image in
-                                        image.resizable()
-                                                 .aspectRatio(contentMode: .fit)
-                                                 .frame(maxWidth: 300)
-                                        }, placeholder: {
-                                            ProgressView()
-                                        })
-                    .cornerRadius(25)
-                    .shadow(radius: 5)
-                    .padding()
-                    
-                    Text(drink.strDrink)
-                        .font(.title).bold()
-                        .padding()
-                    
-                    Text("Instructions: ")
-                    Text(drink.strInstructions)
-                        .font(.caption)
-                    
-                    Text("Ingriedents:")
-                    ForEach(1...15) {i in
-                        Text(drink.strIngredient)
-                        Text(drink.strIngredient2)
-                        Text(drink.strIngredient3)
+                ForEach(drinkDetailVM.drinkDetail, id: \.idDrink) { drink in
+                    ScrollView {
+                        VStack {
+                            Capsule()
+                                .foregroundColor(.secondary)
+                                .opacity(0.5)
+                                .frame(width: 35, height: 5)
+                                .padding(5)
+                            
+                            AsyncImage(url: drink.strDrinkThumb, content: { image in
+                                                image.resizable()
+                                                         .aspectRatio(contentMode: .fit)
+                                                         .frame(maxWidth: 300)
+                                                }, placeholder: {
+                                                    ProgressView()
+                                                })
+                            .cornerRadius(25)
+                            .shadow(radius: 5)
+                            .padding()
+                            
+                            Text(drink.strDrink)
+                                .font(.title).bold()
+                                .padding()
+                            
+                            Text(drink.strInstructions)
+                                .font(.caption)
+                                .padding(.horizontal)
+                            
+                            Text("Ingredients")
+                                .font(.title2)
+                                .padding(.top, 5)
+                            
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                HStack {
+                                    Group {
+                                        VStack {
+                                            Text(drink.strIngredient1)
+                                                .bold()
+                                            Text(drink.strMeasure1)
+                                        }
+                                        
+                                        VStack {
+                                            Text(drink.strIngredient2)
+                                                .bold()
+                                            Text(drink.strMeasure2)
+                                        }
+                                        
+                                        VStack {
+                                            Text(drink.strIngredient3)
+                                                .bold()
+                                            Text(drink.strMeasure3)
+                                        }
+                                        
+                                        VStack {
+                                            Text(drink.strIngredient4)
+                                                .bold()
+                                            Text(drink.strMeasure4)
+                                        }
+                                        
+                                        VStack {
+                                            Text(drink.strIngredient5)
+                                                .bold()
+                                            Text(drink.strMeasure5)
+                                        }
+                                        
+                                        VStack {
+                                            Text(drink.strIngredient6)
+                                                .bold()
+                                            Text(drink.strMeasure6)
+                                        }
+                                        
+                                        VStack {
+                                            Text(drink.strIngredient7)
+                                                .bold()
+                                            Text(drink.strMeasure7)
+                                        }
+                                        
+                                        VStack {
+                                            Text(drink.strIngredient8)
+                                                .bold()
+                                            Text(drink.strMeasure8)
+                                        }
+                                        
+                                        VStack {
+                                            Text(drink.strIngredient9)
+                                                .bold()
+                                            Text(drink.strMeasure9)
+                                        }
+                                    }
+                                    .foregroundColor(.black)
+                                    .padding(10)
+                                    .background(Color("LightGray"))
+                                    .clipShape(RoundedRectangle(cornerRadius: 20))
+                                    .shadow(radius: 2)
+                                }
+                                
+                                .padding(10)
+                            }
+                        }
                     }
-
-
-                    
-                    Spacer()
-                    
                 }
-                .padding()
                 .task {
-                    await drinkDetail.displayDrinkDetail(drinkID: drinkIDs)
+                    await drinkDetailVM.getDrinkDetail(drinkID: drinkIDs)
                 }
             }
         }

@@ -8,12 +8,10 @@
 import SwiftUI
 
 struct ContentView: View {
-
     @StateObject private var drinkListVM = DrinkListViewModel()
     @State private var searchText: String = ""
 
     var body: some View {
-
         NavigationView{
             List(drinkListVM.drinks, id: \.idDrink) {drink in
                 

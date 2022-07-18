@@ -16,7 +16,7 @@ class DrinkListViewModel: ObservableObject {
     
     func search(name: String) async {
         do {
-            let drinks = try await Webservice().getDrinks(searchTerm: name)
+            let drinks = try await APICall().getDrinks(searchTerm: name)
             
             DispatchQueue.main.async {
                 self.drinks = drinks.map(DrinkViewModel.init)
@@ -28,12 +28,13 @@ class DrinkListViewModel: ObservableObject {
     
     
     
-    func displayDrinkDetail(drinkID: String) async {
+    func getDrinkDetail(drinkID: String) async {
         do {
-            let drinks = try await Webservice().fetchDrinkDetail(drinkID: drinkID)
+            let drinks = try await APICall().fetchDrinkDetail(drinkID: drinkID)
             
             DispatchQueue.main.async {
                 self.drinkDetail = drinks.map(DrinkDetailVM.init)
+                
             }
         }catch {
             print(error)
@@ -163,5 +164,4 @@ struct DrinkDetailVM {
     var strMeasure15: String {
         drink.strMeasure15 ?? ""
     }
-    
 }
