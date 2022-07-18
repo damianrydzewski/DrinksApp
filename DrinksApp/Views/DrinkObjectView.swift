@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct DrinkObjectView: View {
+struct DrinkView: View {
     @StateObject var drinkDetailVM = DrinkListViewModel()
     @State private var isSheetDisplayed = false
     

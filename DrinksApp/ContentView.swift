@@ -15,7 +15,7 @@ struct ContentView: View {
         NavigationView{
             List(drinkListVM.drinks, id: \.idDrink) {drink in
                 
-                DrinkObjectView(drinkThumb: drink.strDrinkThumb!,
+                DrinkView(drinkThumb: drink.strDrinkThumb!,
                                 drinkName: drink.strDrink,
                                 drinkIDs: drink.idDrink)
                 
