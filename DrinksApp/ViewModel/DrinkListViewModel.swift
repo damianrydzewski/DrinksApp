@@ -74,7 +74,7 @@ struct DrinkDetailVM {
     var strDrinkThumb: URL? {
         URL(string: drink.strDrinkThumb ?? "")
     }
-    var arrayOfIngredients: [String?] {
+    var arrayOfIngredients: [String] {
         return [drink.strIngredient1,
                 drink.strIngredient2,
                 drink.strIngredient3,
@@ -89,9 +89,9 @@ struct DrinkDetailVM {
                 drink.strIngredient12,
                 drink.strIngredient13,
                 drink.strIngredient14,
-                drink.strIngredient15]
+                drink.strIngredient15].compactMap{str in String(str)}
     }
-    var arrayOfMeasure: [String?] {
+    var arrayOfMeasure: [String] {
         return [drink.strMeasure1,
                 drink.strMeasure2,
                 drink.strMeasure3,
@@ -106,6 +106,6 @@ struct DrinkDetailVM {
                 drink.strMeasure12,
                 drink.strMeasure13,
                 drink.strMeasure14,
-                drink.strMeasure15]
+                drink.strMeasure15].compactMap{str in String(str)}
     }
 }
