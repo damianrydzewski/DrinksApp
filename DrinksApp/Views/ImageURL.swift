@@ -17,11 +17,11 @@ struct ImageURL: View {
                 ProgressView()
             }
         }.task {
-            await downloadImage()
+            await getImage()
         }
     }
     
-    private func downloadImage() async {
+    private func getImage() async {
         do {
             try await imageLoader.fetchImage(url)
         } catch {
