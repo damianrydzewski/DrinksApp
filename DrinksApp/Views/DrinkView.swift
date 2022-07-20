@@ -72,11 +72,11 @@ struct DrinkView: View {
                                                 Text(item.0)
                                                 Text(item.1)
                                             }
-                                            .foregroundColor(.black)
+                                            .foregroundColor(.white)
                                             .padding()
-                                            .background(Color("LightGray"))
+                                            .background(Color(.black))
                                             .clipShape(RoundedRectangle(cornerRadius: 25))
-                                            .shadow(radius: 3)
+                                            .shadow(radius: 2)
                                         }
                                     }
                                 }

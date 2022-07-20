@@ -20,7 +20,8 @@ struct ContentView: View {
                                 drinkIDs: drink.idDrink)
                 
             }
-            .navigationTitle("Search for drink")
+            .animation(.default)
+            .navigationTitle("Drinks App")
             .listStyle(.plain)
             .searchable(text: $searchText)
             .onChange(of: searchText) { value in
@@ -33,7 +34,6 @@ struct ContentView: View {
                 }
             }
         }
-        .navigationTitle("Drinks App")
     }
 }
 
