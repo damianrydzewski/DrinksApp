@@ -38,9 +38,12 @@ class APICall {
             throw NetworkError.badURL
         }
                 
-        let (data, _) = try await URLSession.shared.data(from: url)
-        let decodedResponse = try? JSONDecoder().decode(DrinkDetailResponse.self, from: data)
+        let (data, response) = try await URLSession.shared.data(from: url)
         
+        guard let httpResponse = response as? HTTPURLResponse,
+                  httpResponse.statusCode == 200 else {throw NetworkError.badRequest}
+        
+        let decodedResponse = try? JSONDecoder().decode(DrinkDetailResponse.self, from: data)
         return decodedResponse?.drinks ?? []
     }
 }
