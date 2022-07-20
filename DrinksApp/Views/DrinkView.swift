@@ -77,24 +77,16 @@ struct DrinkView: View {
                                 .padding(.top, 5)
                             
                             ScrollView(.horizontal, showsIndicators: false) {
-                                  ForEach(drinkDetailVM.arrayOfIngredients, id: \.self) {ingredient in
-                                       ForEach(drinkDetailVM.arrayOfMeasure, id: \.self) {measure in
-                                            VStack{
-                                                Text(ingredient)
-                                                Text(measure)
-                                            }
-                                        }
-                                  }
-                                       
-
-                                    .foregroundColor(.black)
-                                    .padding(10)
-                                    .background(Color("LightGray"))
-                                    .clipShape(RoundedRectangle(cornerRadius: 20))
-                                    .shadow(radius: 5)
-                                }
                                 
-                                .padding(10)
+                                  
+//                                    .foregroundColor(.black)
+//                                    .padding(10)
+//                                    .background(Color("LightGray"))
+//                                    .clipShape(RoundedRectangle(cornerRadius: 20))
+//                                    .shadow(radius: 5)
+                                
+                                
+//                                .padding(10)
                             }
                         }
                     }
