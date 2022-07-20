@@ -1,7 +1,7 @@
 import Foundation
 import SwiftUI
 
-struct URLImage: View {
+struct ImageURL: View {
     
     let url: URL?
     @StateObject private var imageLoader = ImageLoader()
