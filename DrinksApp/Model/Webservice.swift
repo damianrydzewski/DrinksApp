@@ -11,6 +11,7 @@ import Foundation
 enum NetworkError: Error {
     case badURL
     case badRequest
+    case unsupportedImage
 }
 
 class APICall {

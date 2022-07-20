@@ -3,15 +3,18 @@ import SwiftUI
 
 struct ImageURL: View {
     
-    let url: URL?
     @StateObject private var imageLoader = ImageLoader()
+    let url: URL?
     
     var body: some View {
         VStack {
             if let uiImage = imageLoader.uiImage {
                 Image(uiImage: uiImage)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(maxWidth: 80)
             } else {
-                ProgressView("Loading...")
+                ProgressView()
             }
         }.task {
             await downloadImage()

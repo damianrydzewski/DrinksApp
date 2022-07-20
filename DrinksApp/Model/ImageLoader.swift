@@ -1,11 +1,6 @@
 import Foundation
 import UIKit
 
-enum NetworkError: Error {
-    case badRequest
-    case unsupportedImage
-    case badUrl
-}
 
 @MainActor
 class ImageLoader: ObservableObject {
@@ -16,12 +11,12 @@ class ImageLoader: ObservableObject {
     func fetchImage(_ url: URL?) async throws {
         
         guard let url = url else {
-            throw NetworkError.badUrl
+            throw NetworkError.badURL
         }
         
         let request = URLRequest(url: url)
         
-        // check in cache
+        // Sprawdzamy czy nie ma w cache
         if let cachedImage = Self.cache.object(forKey: url.absoluteString as NSString) {
             uiImage = cachedImage
         } else {
@@ -36,7 +31,7 @@ class ImageLoader: ObservableObject {
                 throw NetworkError.unsupportedImage
             }
             
-            // store it in the cache
+            // Przechowuje cache
             Self.cache.setObject(image, forKey: url.absoluteString as NSString)
             uiImage = image
         }

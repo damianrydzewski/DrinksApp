@@ -21,22 +21,9 @@ struct DrinkView: View {
         } label: {
             HStack (spacing: 20){
                 ImageURL(url: drinkThumb)
-                //add here properties
-                                             // image.resizable()
-                                             //.aspectRatio(contentMode: .fit)
-                                            // .frame(maxWidth: 80)
-                
-                
-//                 AsyncImage(url: drinkThumb, content: { image in
-//                                     image.resizable()
-//                                              .aspectRatio(contentMode: .fit)
-//                                              .frame(maxWidth: 80)
-//                                     }, placeholder: {
-//                                         ProgressView()
-//                                     })
-//                 .clipShape(Circle())
-//                 .shadow(radius: 5)
-                
+                    .clipShape(Circle())
+                    .shadow(radius: 5)
+                                    
                 Text(drinkName)
                     .font(.body).bold()
             }
@@ -77,16 +64,23 @@ struct DrinkView: View {
                                 .padding(.top, 5)
                             
                             ScrollView(.horizontal, showsIndicators: false) {
-                                
-                                  
-//                                    .foregroundColor(.black)
-//                                    .padding(10)
-//                                    .background(Color("LightGray"))
-//                                    .clipShape(RoundedRectangle(cornerRadius: 20))
-//                                    .shadow(radius: 5)
-                                
-                                
-//                                .padding(10)
+                                HStack (spacing: 10) {
+                                    ForEach(Array(zip(drink.arrayOfIngredients, drink.arrayOfMeasure)), id: \.0) {item in
+                                        
+                                        if item.0 != "" {
+                                            VStack {
+                                                Text(item.0)
+                                                Text(item.1)
+                                            }
+                                            .foregroundColor(.black)
+                                            .padding()
+                                            .background(Color("LightGray"))
+                                            .clipShape(RoundedRectangle(cornerRadius: 25))
+                                            .shadow(radius: 3)
+                                        }
+                                    }
+                                }
+                                .padding()
                             }
                         }
                     }
