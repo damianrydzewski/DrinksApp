@@ -1,4 +1,4 @@
-#API #SwiftUI
+#APIcall #SwiftUI #MVVM
 
 Drink App is an simple app which allows you
 search drinks by ingredients and display more
